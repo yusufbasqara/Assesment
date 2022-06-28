@@ -1,4 +1,4 @@
-package com.d3if3071.assesment1_kalkulator
+package com.d3if3071.assesment1_kalkulator.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
