@@ -6,11 +6,17 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.d3if3071.assesment1_kalkulator.databinding.ActivityMainBinding
+import com.d3if3071.assesment1_kalkulator.model.HasilLuas
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    private val viewModel: MainViewModel by lazy {
+        ViewModelProvider(this)[MainViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.button.setOnClickListener { hitungLuas() }
+        viewModel.getHasilLuas().observe(this, { showResult(it) })
         binding.button2.setOnClickListener { reset() }
 
     }
@@ -29,6 +36,12 @@ class MainActivity : AppCompatActivity() {
         binding.editTextNumber3.text.clear()
         binding.radioGroup.clearCheck()
         binding.hasilLuas.text = getString(R.string.luas_bangun)
+
+    }
+
+    private fun showResult(result: HasilLuas? ) {
+        if (result == null) return
+        binding.hasilLuas.text = getString(R.string.luas_bangun, result.hasilBangunRuang)
 
     }
 
@@ -57,9 +70,11 @@ class MainActivity : AppCompatActivity() {
                     tinggi
                 )
             ) {
-                val hasilBangunRuang =
-                    (panjang.toDouble() * lebar.toDouble() * tinggi.toDouble())
-                binding.hasilLuas.text = hasilBangunRuang.toString()
+               viewModel.hitungLuas(
+                   panjang.toFloat(),
+                   tinggi.toFloat(),
+                   lebar.toFloat()
+               )
             }
         } else {
             val hasilBangunDatar = panjang.toDouble() * lebar.toDouble()

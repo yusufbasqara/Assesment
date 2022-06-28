@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Assesment1_kalkulator</string>
     <string name="kalkulatorVolume">Kalkulator Volume Bangun Ruang</string>
-    <string name="kalkulatorIntro">"Kalkulator bangun ruang ini digunakan untuk menghitung setiap bangun ruang yang berbeda-beda sehingga setiap bangun ruang yang berbeda bisa dihitung secara otomatis. Berikut input ukuran yang ingin dihitung : "</string>
+    <string name="kalkulatorIntro">"Kalkulator bangun ruang ini digunakan untuk menghitung
+        setiap bangun ruang yang berbeda-beda sehingga setiap bangun ruang yang berbeda bisa
+        dihitung secara otomatis. Berikut input ukuran yang ingin dihitung : "</string>
     <string name="panjangBangun">Panjang</string>
     <string name="lebarBangun">Lebar</string>
     <string name="tinggiBangun">Tinggi</string>
@@ -10,7 +12,7 @@
     <string name="persegi_panjang">Persegi Panjang</string>
     <string name="balok">Balok</string>
     <string name="kubik">Kubik</string>
-    <string name="luas_bangun">Luas Bangun :</string>
+    <string name="luas_bangun">Luas Bangun : %1$.2f</string>
     <string name="panjang_invalid">Panjang Belum Diisi</string>
     <string name="lebar_invalid">Lebar belum diisi</string>
     <string name="tinggi_invalid">Tinggi belum diisi</string>
