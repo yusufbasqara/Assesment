@@ -1,15 +1,15 @@
 package com.d3if3071.assesment1_kalkulator.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.d3if3071.assesment1_kalkulator.R
 import com.d3if3071.assesment1_kalkulator.databinding.FragmentHitungBinding
 import com.d3if3071.assesment1_kalkulator.model.HasilLuas
@@ -28,6 +28,7 @@ class HitungFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHitungBinding.inflate(layoutInflater, container, false)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -38,8 +39,33 @@ class HitungFragment : Fragment() {
                 R.id.action_hitungFragment_to_hasilFragment
             )
         }
+        binding.shareButton.setOnClickListener { shareData() }
         viewModel.getHasilLuas().observe(requireActivity(), { showResult(it) })
 
+    }
+
+    private fun shareData() {
+        val selectedId = binding.radioGroup.checkedRadioButtonId
+        val jenisRuang = if (selectedId == R.id.persegiButton)
+            getString(R.string.persegi_panjang)
+        else if (selectedId == R.id.kubikButton)
+            getString(R.string.kubik)
+        else
+            getString(R.string.balok)
+        val message = getString(R.string.bagikan_template,
+            binding.editTextNumber.text,
+            binding.editTextNumber2.text,
+            binding.editTextNumber3.text,
+            jenisRuang,
+            binding.hasilLuas.text,
+            binding.hasilButton.text
+        )
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.setType("text/plain").putExtra(Intent.EXTRA_TEXT, message)
+        if (shareIntent.resolveActivity(
+                requireActivity().packageManager) != null) {
+            startActivity(shareIntent)
+        }
     }
 
     private fun reset() {
@@ -56,6 +82,19 @@ class HitungFragment : Fragment() {
         binding.hasilLuas.text = getString(R.string.luas_bangun, result.hasilBangunRuang)
         binding.hasilButton.visibility = View.VISIBLE
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.option_menu, menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_about) {
+            findNavController().navigate(
+                R.id.action_hitungFragment_to_aboutFragment)
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun hitungLuas() {
