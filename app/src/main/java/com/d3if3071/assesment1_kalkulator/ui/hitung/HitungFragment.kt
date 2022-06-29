@@ -1,4 +1,4 @@
-package com.d3if3071.assesment1_kalkulator.ui
+package com.d3if3071.assesment1_kalkulator.ui.hitung
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,14 +12,17 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.d3if3071.assesment1_kalkulator.R
 import com.d3if3071.assesment1_kalkulator.databinding.FragmentHitungBinding
+import com.d3if3071.assesment1_kalkulator.db.KalkulatorDb
 import com.d3if3071.assesment1_kalkulator.model.HasilLuas
 
 class HitungFragment : Fragment() {
 
     private lateinit var binding: FragmentHitungBinding
 
-    private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(requireActivity())[MainViewModel::class.java]
+    private val viewModel: HitungViewModel by lazy {
+        val db = KalkulatorDb.getInstance(requireContext())
+        val factory = HitungViewModelFactory(db.dao)
+        ViewModelProvider(this, factory)[HitungViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -41,6 +44,7 @@ class HitungFragment : Fragment() {
         }
         binding.shareButton.setOnClickListener { shareData() }
         viewModel.getHasilLuas().observe(requireActivity(), { showResult(it) })
+        
 
     }
 
@@ -89,10 +93,17 @@ class HitungFragment : Fragment() {
         inflater.inflate(R.menu.option_menu, menu)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_about) {
-            findNavController().navigate(
-                R.id.action_hitungFragment_to_aboutFragment)
-            return true
+        when(item.itemId) {
+            R.id.menu_histori -> {
+                findNavController().navigate(R.id.action_hitungFragment_to_historiFragment)
+                return true
+            }
+            R.id.menu_about -> {
+                findNavController().navigate(
+                    R.id.action_hitungFragment_to_aboutFragment
+                )
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
