@@ -11,4 +11,5 @@ data class KalkulatorEntity(
     var panjang: Float,
     var lebar: Float,
     var tinggi: Float,
+    var jenis: String,
 )

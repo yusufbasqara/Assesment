@@ -44,7 +44,7 @@ class HitungFragment : Fragment() {
         }
         binding.shareButton.setOnClickListener { shareData() }
         viewModel.getHasilLuas().observe(requireActivity(), { showResult(it) })
-        
+
 
     }
 
@@ -56,7 +56,8 @@ class HitungFragment : Fragment() {
             getString(R.string.kubik)
         else
             getString(R.string.balok)
-        val message = getString(R.string.bagikan_template,
+        val message = getString(
+            R.string.bagikan_template,
             binding.editTextNumber.text,
             binding.editTextNumber2.text,
             binding.editTextNumber3.text,
@@ -67,7 +68,9 @@ class HitungFragment : Fragment() {
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.setType("text/plain").putExtra(Intent.EXTRA_TEXT, message)
         if (shareIntent.resolveActivity(
-                requireActivity().packageManager) != null) {
+                requireActivity().packageManager
+            ) != null
+        ) {
             startActivity(shareIntent)
         }
     }
@@ -81,7 +84,7 @@ class HitungFragment : Fragment() {
 
     }
 
-    private fun showResult(result: HasilLuas? ) {
+    private fun showResult(result: HasilLuas?) {
         if (result == null) return
         binding.hasilLuas.text = getString(R.string.luas_bangun, result.hasilBangunRuang)
         binding.hasilButton.visibility = View.VISIBLE
@@ -92,8 +95,9 @@ class HitungFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.option_menu, menu)
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.menu_histori -> {
                 findNavController().navigate(R.id.action_hitungFragment_to_historiFragment)
                 return true
@@ -121,11 +125,11 @@ class HitungFragment : Fragment() {
         }
 
         val tinggi = binding.editTextNumber3.text.toString()
-
-
-        val selectedId = binding.radioGroup.checkedRadioButtonId
-
-        if (selectedId == 2131230956 || selectedId == 2131230807) {
+        val isSelected = binding.radioGroup.checkedRadioButtonId
+        val kubik = binding.kubikButton
+        val balok = binding.balokButton
+        val persegiPanjang = binding.persegiButton.isChecked
+        if (kubik.isChecked || balok.isChecked) {
             if (TextUtils.isEmpty(tinggi)) {
                 Toast.makeText(context, R.string.tinggi_invalid, Toast.LENGTH_SHORT).show()
             }
@@ -133,17 +137,29 @@ class HitungFragment : Fragment() {
                     tinggi
                 )
             ) {
-               viewModel.hitungLuas(
-                   panjang.toFloat(),
-                   tinggi.toFloat(),
-                   lebar.toFloat()
-               )
+                var jenis = ""
+
+                if (kubik.id == isSelected) jenis = "kubik"
+                if (balok.id == isSelected) jenis = "balok"
+                viewModel.hitungLuas(
+                    panjang.toFloat(),
+                    tinggi.toFloat(),
+                    lebar.toFloat(),
+                    jenis
+                )
             }
         } else {
             val hasilBangunDatar = panjang.toDouble() * lebar.toDouble()
             binding.hasilLuas.text = hasilBangunDatar.toString()
+            viewModel.hitungLuas(
+                panjang.toFloat(),
+                1.0f,
+                lebar.toFloat(),
+                "persegi panjang",
+            )
         }
 
-        Log.d("check id", selectedId.toString())
+        Log.d("check kubik", kubik.toString())
+        Log.d("check balok", balok.toString())
     }
 }
