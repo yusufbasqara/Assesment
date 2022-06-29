@@ -12,5 +12,6 @@ interface KalkulatorDao {
     @Query("SELECT * FROM kalkulator ORDER BY id DESC")
     fun getLastKalkulator(): LiveData<List<KalkulatorEntity>>
 
-
+    @Query("DELETE FROM kalkulator")
+    fun clearData()
 }
