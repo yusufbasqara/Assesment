@@ -45,6 +45,8 @@ class HitungFragment : Fragment() {
         binding.shareButton.setOnClickListener { shareData() }
         viewModel.getHasilLuas().observe(requireActivity(), { showResult(it) })
 
+        binding.buttonData.setOnClickListener{}
+
 
     }
 
@@ -73,15 +75,6 @@ class HitungFragment : Fragment() {
         ) {
             startActivity(shareIntent)
         }
-    }
-
-    private fun reset() {
-        binding.editTextNumber.text.clear()
-        binding.editTextNumber2.text.clear()
-        binding.editTextNumber3.text.clear()
-        binding.radioGroup.clearCheck()
-        binding.hasilLuas.text = getString(R.string.luas_bangun)
-
     }
 
     private fun showResult(result: HasilLuas?) {
@@ -113,15 +106,19 @@ class HitungFragment : Fragment() {
     }
 
     private fun hitungLuas() {
+        var isBoolean = true;
+
         val panjang = binding.editTextNumber.text.toString()
         if (TextUtils.isEmpty(panjang)) {
             Toast.makeText(context, R.string.panjang_invalid, Toast.LENGTH_SHORT).show()
+            isBoolean = false;
         }
 
 
         val lebar = binding.editTextNumber2.text.toString()
         if (TextUtils.isEmpty(lebar)) {
             Toast.makeText(context, R.string.lebar_invalid, Toast.LENGTH_SHORT).show()
+            isBoolean = false;
         }
 
         val tinggi = binding.editTextNumber3.text.toString()
@@ -129,13 +126,15 @@ class HitungFragment : Fragment() {
         val kubik = binding.kubikButton
         val balok = binding.balokButton
         val persegiPanjang = binding.persegiButton.isChecked
+
+        if (TextUtils.isEmpty(tinggi)) {
+            Toast.makeText(context, R.string.tinggi_invalid, Toast.LENGTH_SHORT).show()
+            isBoolean  = false;
+        }
+
+
         if (kubik.isChecked || balok.isChecked) {
-            if (TextUtils.isEmpty(tinggi)) {
-                Toast.makeText(context, R.string.tinggi_invalid, Toast.LENGTH_SHORT).show()
-            }
-            if (!TextUtils.isEmpty(panjang) && !TextUtils.isEmpty(lebar) && !TextUtils.isEmpty(
-                    tinggi
-                )
+            if (isBoolean
             ) {
                 var jenis = ""
 
@@ -148,15 +147,17 @@ class HitungFragment : Fragment() {
                     jenis
                 )
             }
-        } else {
-            val hasilBangunDatar = panjang.toDouble() * lebar.toDouble()
-            binding.hasilLuas.text = hasilBangunDatar.toString()
-            viewModel.hitungLuas(
-                panjang.toFloat(),
-                1.0f,
-                lebar.toFloat(),
-                "persegi panjang",
-            )
+        } else{
+            if(isBoolean){
+                val hasilBangunDatar = panjang.toDouble() * lebar.toDouble()
+                binding.hasilLuas.text = hasilBangunDatar.toString()
+                viewModel.hitungLuas(
+                    panjang.toFloat(),
+                    1.0f,
+                    lebar.toFloat(),
+                    "persegi panjang",
+                )
+            }
         }
 
         Log.d("check kubik", kubik.toString())
