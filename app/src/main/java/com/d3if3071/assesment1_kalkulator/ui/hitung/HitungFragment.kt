@@ -45,7 +45,11 @@ class HitungFragment : Fragment() {
         binding.shareButton.setOnClickListener { shareData() }
         viewModel.getHasilLuas().observe(requireActivity(), { showResult(it) })
 
-        binding.buttonData.setOnClickListener{}
+        binding.buttonData.setOnClickListener{
+            it.findNavController().navigate(
+                R.id.action_hitungFragment_to_konversiFragment
+            )
+        }
 
 
     }

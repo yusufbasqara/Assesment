@@ -27,4 +27,8 @@ object DataApi{
     val service: DataApiService by lazy {
         retrofit.create(DataApiService::class.java)
     }
+
+    fun getCurrency(): String {
+        return BASE_URL
+    }
 }

@@ -17,11 +17,15 @@
         <action
             android:id="@+id/action_hitungFragment_to_historiFragment"
             app:destination="@id/historiFragment" />
+        <action
+            android:id="@+id/action_hitungFragment_to_konversiFragment"
+            app:destination="@id/konversiFragment" />
     </fragment>
     <fragment
         android:id="@+id/hasilFragment"
         android:name="com.d3if3071.assesment1_kalkulator.ui.HasilFragment"
-        android:label="HasilFragment" />
+        android:label="HasilFragment"
+        tools:layout="@layout/fragment_hasil"/>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.d3if3071.assesment1_kalkulator.ui.AboutFragment"
@@ -33,4 +37,9 @@
         android:label="@string/histori"
         tools:layout="@layout/fragment_histori"
         />
+    <fragment
+        android:id="@+id/konversiFragment"
+        android:name="com.d3if3071.assesment1_kalkulator.ui.konversi.KonversiFragment"
+        android:label="KonversiFragment"
+        tools:layout="@layout/fragment_konversi"/>
 </navigation>

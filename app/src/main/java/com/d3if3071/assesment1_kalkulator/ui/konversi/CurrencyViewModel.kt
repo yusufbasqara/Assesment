@@ -1,4 +1,4 @@
-package com.d3if3071.assesment1_kalkulator.model
+package com.d3if3071.assesment1_kalkulator.ui.konversi
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -20,7 +20,8 @@ class CurrencyViewModel : ViewModel(){
         viewModelScope.launch (Dispatchers.IO) {
             try {
                 val result = DataApi.service.getData()
-                data.postValue(DataApi.service.getData())
+                data.postValue(result)
+                Log.d("MainViewModel", "Success: $result")
             } catch (e: Exception) {
                 Log.d("MainViewModel", "Failure: ${e.message}")
             }
