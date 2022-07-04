@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.d3if3071.assesment1_kalkulator.databinding.FragmentKonversiBinding
+import com.d3if3071.assesment1_kalkulator.network.ApiStatus
 import com.d3if3071.assesment1_kalkulator.network.KonversiAdapter
 
 class GaleriFragment : Fragment() {
@@ -43,5 +44,24 @@ class GaleriFragment : Fragment() {
             myAdapter.updateData(it)
         })
 
+        viewModel.getStatus().observe(viewLifecycleOwner, {
+            updateProgress(it)
+        })
+
+        viewModel.scheduleUpdater(requireActivity().application)
+    }
+    private fun updateProgress(status: ApiStatus) {
+        when (status) {
+            ApiStatus.LOADING -> {
+                binding.progressBar.visibility = View.VISIBLE
+            }
+            ApiStatus.SUCCESS -> {
+                binding.progressBar.visibility = View.GONE
+            }
+            ApiStatus.FAILED -> {
+                binding.progressBar.visibility = View.GONE
+                binding.networkError.visibility = View.VISIBLE
+            }
+        }
     }
 }

@@ -36,16 +36,16 @@ class  KonversiAdapter : RecyclerView.Adapter<KonversiAdapter.ViewHolder>() {
         private val binding: ItemKonversiBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(currency: GaleriModel) = with(binding) {
-            TextView1.text = currency.nama
-            TextView2.text = currency.namaLatin
+        fun bind(galeri: GaleriModel) = with(binding) {
+            TextView1.text = galeri.nama
+            TextView2.text = galeri.namaLatin
             Glide.with(imageView3.context)
-                .load(DataApi.getDataUrl(currency.imageId))
+                .load(DataApi.getDataUrl(galeri.imageId))
                 .error(R.drawable.ic_baseline_broken_image_24)
                 .into(imageView3)
 
             root.setOnClickListener {
-                val message = root.context.getString(R.string.message, currency.nama)
+                val message = root.context.getString(R.string.message, galeri.nama)
                 Toast.makeText(root.context, message, Toast.LENGTH_LONG).show()
             }
         }
