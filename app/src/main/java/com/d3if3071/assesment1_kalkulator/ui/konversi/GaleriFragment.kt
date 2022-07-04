@@ -5,24 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.d3if3071.assesment1_kalkulator.databinding.FragmentKonversiBinding
-import com.d3if3071.assesment1_kalkulator.db.KalkulatorDb
 import com.d3if3071.assesment1_kalkulator.network.KonversiAdapter
-import com.d3if3071.assesment1_kalkulator.ui.histori.HistoriViewModel
-import com.d3if3071.assesment1_kalkulator.ui.histori.HistoriViewModelFactory
 
-class KonversiFragment : Fragment() {
+class GaleriFragment : Fragment() {
 
     private lateinit var binding: FragmentKonversiBinding
     private lateinit var myAdapter: KonversiAdapter
 
 
-    private val viewModel: CurrencyViewModel by lazy {
-        ViewModelProvider(this)[CurrencyViewModel::class.java]
+    private val viewModel: GaleriViewModel by lazy {
+        ViewModelProvider(this)[GaleriViewModel::class.java]
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

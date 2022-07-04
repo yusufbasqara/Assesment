@@ -4,15 +4,15 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.d3if3071.assesment1_kalkulator.model.CurrencyModel
+import com.d3if3071.assesment1_kalkulator.model.GaleriModel
 import com.d3if3071.assesment1_kalkulator.network.DataApi
 import kotlinx.coroutines.Dispatchers
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 
-class CurrencyViewModel : ViewModel(){
-    private val data = MutableLiveData<List<CurrencyModel>>()
+class GaleriViewModel : ViewModel(){
+    private val data = MutableLiveData<List<GaleriModel>>()
     init {
         retrieveData()
     }
@@ -28,6 +28,6 @@ class CurrencyViewModel : ViewModel(){
         }
     }
 
-    fun getData():LiveData<List<CurrencyModel>> = data
+    fun getData():LiveData<List<GaleriModel>> = data
 
 }

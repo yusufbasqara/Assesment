@@ -39,7 +39,7 @@
         />
     <fragment
         android:id="@+id/konversiFragment"
-        android:name="com.d3if3071.assesment1_kalkulator.ui.konversi.KonversiFragment"
+        android:name="com.d3if3071.assesment1_kalkulator.ui.konversi.GaleriFragment"
         android:label="KonversiFragment"
         tools:layout="@layout/fragment_konversi"/>
 </navigation>

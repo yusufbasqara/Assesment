@@ -1,6 +1,6 @@
 package com.d3if3071.assesment1_kalkulator.network
 
-import com.d3if3071.assesment1_kalkulator.model.CurrencyModel
+import com.d3if3071.assesment1_kalkulator.model.GaleriModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -21,7 +21,7 @@ private val retrofit = Retrofit.Builder()
 
 interface DataApiService {
     @GET("static-api.json")
-    suspend fun getData(): List<CurrencyModel>
+    suspend fun getData(): List<GaleriModel>
 }
 
 object DataApi{
