@@ -24,15 +24,15 @@
         app:layout_constraintTop_toBottomOf="@id/TextView1"
         app:layout_constraintStart_toStartOf="@id/TextView1"
         tools:text="Kalkulator: 24,22 - Luas" />
-    <TextView
-        android:id="@+id/TextView3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="@+id/TextView1"
-        app:layout_constraintTop_toBottomOf="@+id/TextView2"
-        tools:text="Ruangan Bangun Datar - Sempit" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="38dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/TextView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/TextView2"
+        app:layout_constraintTop_toTopOf="@+id/TextView2"
+        tools:srcCompat="@tools:sample/avatars" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

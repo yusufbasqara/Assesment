@@ -7,7 +7,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
-private const val BASE_URL = "https://api.exchangerate-api.com/v4/latest/euro"
+private const val BASE_URL = "https://raw.githubusercontent.com/" +
+        "indraazimi/galeri-hewan/static-api/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -28,7 +29,7 @@ object DataApi{
         retrofit.create(DataApiService::class.java)
     }
 
-    fun getCurrency(): String {
-        return BASE_URL
+    fun getDataUrl(nama: String): String {
+        return "$BASE_URL$nama.jpg"
     }
 }

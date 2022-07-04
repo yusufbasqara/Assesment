@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.d3if3071.assesment1_kalkulator.R
 import com.d3if3071.assesment1_kalkulator.databinding.ItemKonversiBinding
 import com.d3if3071.assesment1_kalkulator.model.CurrencyModel
@@ -36,15 +37,15 @@ class  KonversiAdapter : RecyclerView.Adapter<KonversiAdapter.ViewHolder>() {
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(currency: CurrencyModel) = with(binding) {
-            TextView1.text = currency.base
-            TextView2.text = currency.date
-//            Glide.with(imageView.context)
-//                .load(HewanApi.getHewanUrl(hewan.imageId))
-//                .error(R.drawable.ic_baseline_broken_image_24)
-//                .into(imageView)
+            TextView1.text = currency.nama
+            TextView2.text = currency.namaLatin
+            Glide.with(imageView3.context)
+                .load(DataApi.getDataUrl(currency.imageId))
+                .error(R.drawable.ic_baseline_broken_image_24)
+                .into(imageView3)
 
             root.setOnClickListener {
-                val message = root.context.getString(R.string.message, currency.base)
+                val message = root.context.getString(R.string.message, currency.nama)
                 Toast.makeText(root.context, message, Toast.LENGTH_LONG).show()
             }
         }
